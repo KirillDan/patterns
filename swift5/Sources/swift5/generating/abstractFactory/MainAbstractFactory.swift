@@ -21,7 +21,7 @@ fileprivate class SUV : Car {
 }
 
 fileprivate protocol AbstractFactory {
-	// public func getTransmission(type: TransmissionType) -> Transmission?;
+	func getTransmission(type: TransmissionType) -> Transmission?;
 	func getCarType(value: CarType) -> Car?;
 }
 
@@ -37,9 +37,54 @@ fileprivate class CarFactory : AbstractFactory {
 		} 
     }
 
-    // public func getTransmission(type: TransmissionType) -> Transmission? {
-    //     return nil;
-    // }
+    public func getTransmission(type: TransmissionType) -> Transmission? {
+        return nil;
+    }
+}
+
+fileprivate enum TransmissionType: String {
+	case FiveGear = "5 gear"
+	case SixGear = "6 gear"
+	case SevenGear = "7 gear"
+}
+
+fileprivate protocol Transmission {
+	func getType() -> String
+}
+
+class DefaultTransmission : Transmission {
+	func getType() -> String {
+		return TransmissionType.FiveGear.rawValue;
+	}
+}
+
+class UpgratedTransmission : Transmission {
+	func getType() -> String {
+		return TransmissionType.SixGear.rawValue;
+	}
+}
+
+class RaceTransmission : Transmission {
+	func getType() -> String {
+		return TransmissionType.SevenGear.rawValue;
+	}
+}
+
+fileprivate class TransmissionFactory : AbstractFactory {
+    public func getCarType(value: CarType) -> Car? {
+        return nil
+    }
+
+    public func getTransmission(type: TransmissionType) -> Transmission? {
+        switch type {
+        case .SixGear:
+			return UpgratedTransmission();
+		case .SevenGear:
+			return RaceTransmission();
+		default:
+			return DefaultTransmission();
+		} 
+    }
 }
 
 public class MainAbstractFactory {

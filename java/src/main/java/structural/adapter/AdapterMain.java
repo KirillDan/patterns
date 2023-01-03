@@ -2,7 +2,7 @@ package structural.adapter;
 
 class OldService {
 	public String requestOld(String valueOld) {
-		return "result";
+		return "result with old value = " + valueOld;
 	}
 }
 
@@ -19,7 +19,7 @@ class AdapterFromNewToOld implements NewService {
 
 	@Override
 	public String requestNew(Integer valueNew) {
-		return this.convertValueFromNewToOld(valueNew);
+		return this.oldService.requestOld(this.convertValueFromNewToOld(valueNew));
 	}
 	
 	private String convertValueFromNewToOld(Integer valueNew) {
