@@ -10,5 +10,9 @@ public struct Swift5 {
         // MainBridge.main()
         // CompositeObjectMain.main()
         // DecoratorMain.main()
+        // ChainMain.main()
+        // CommandMain.main()
+        // ObserverMain.main()
+        TemplateMethod.main()
     }
 }

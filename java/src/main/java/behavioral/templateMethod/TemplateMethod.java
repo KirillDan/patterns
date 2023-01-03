@@ -1,25 +1,27 @@
 package behavioral.templateMethod;
 
-abstract class StringCalc {
-	public Integer toInteger(String value) {
-		return Integer.valueOf(value);
+abstract class Conversion {
+	public Float toCM(Integer inch) {
+		return new Float(inch) * 2.54f;
 	}
 	
-	abstract public Integer add(String a, String b);
+	abstract public Float addCmAndInch(Integer cm, Integer inch);
 }
 
-class StringCalcImpl extends StringCalc {
+class AddingImpl extends Conversion {
 
 	@Override
-	public Integer add(String a, String b) {
-		return this.toInteger(a) + this.toInteger(b);
+	public Float addCmAndInch(Integer cm, Integer inch) {
+		return cm + this.toCM(inch);
 	}
 	
 }
 
 public class TemplateMethod {
 	public static void main(String[] args) {
-		StringCalc stringCalc = new StringCalcImpl();
-		System.out.println(stringCalc.add("1", "10"));
+		AddingImpl addingImpl = new AddingImpl();
+		Integer cm = 1;
+		Integer inch = 1;
+		System.out.println(cm + " cm + " + inch + " inch = " + addingImpl.addCmAndInch(cm, inch) + " cm");
 	}
 }
